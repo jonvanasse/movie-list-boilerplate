@@ -1,0 +1,18 @@
+#app {
+  display: grid | inline-grid;
+  font-family: Ubuntu;
+}
+
+#movieListHeader h2 {
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.movieListing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
