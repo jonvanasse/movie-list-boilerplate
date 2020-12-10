@@ -5,24 +5,27 @@ class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: ''
+      search: '',
+      error: false
     }
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onFocusSearch = this.onFocusSearch.bind(this);
   }
 
-  handleClick(event) {
-    console.log(event);
+  handleSubmit(event) {
+    var searched = this.state.search;
+    this.setState({search: ''});
+    this.props.searchMovies(searched);
   }
 
   handleChange(event) {
     var newChar = event.target.value;
-    var search = this.state.search;
-    this.setState({search: search + newChar})
+    this.setState({search: newChar})
   }
 
   onFocusSearch(event) {
+    this.setState({search: ''})
     event.target.value = '';
   }
 
@@ -32,9 +35,9 @@ class NavBar extends React.Component {
         <h2>Movie List</h2>
         <div id="searchBar">
           <label>
-            <input type="text" name="search" onChange={this.handleChange} defaultValue="Search for a movie..." onFocus={this.onFocusSearch}></input>
+            <input type="text" name="search" onSubmit={this.handleSubmit} onChange={this.handleChange} defaultValue="Search for a movie..." onFocus={this.onFocusSearch}></input>
           </label>
-          <button onClick={this.handleClick}>&#x1F50D;</button>
+          <button onClick={this.handleSubmit}>&#x1F50D;</button>
         </div>
       </div>
     )
