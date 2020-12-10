@@ -3,10 +3,10 @@
   font-family: Ubuntu;
 }
 
-#movieListHeader h2 {
+#movieListHeader {
   background-color: lightgray;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 60px;
 }
