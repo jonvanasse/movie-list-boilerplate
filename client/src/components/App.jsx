@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from './MovieList.jsx';
 import NavBar from './NavBar.jsx';
+import AddBar from './AddBar.jsx';
 
 var movies = [
   {
@@ -35,6 +36,7 @@ class App extends React.Component {
       allMovies: [...movies]
     };
     this.searchMovies = this.searchMovies.bind(this);
+    this.addMovie = this.addMovie.bind(this);
   }
 
   searchMovies(title) {
@@ -47,19 +49,24 @@ class App extends React.Component {
       }
     }
     if (results.length === 0) {
-      console.log('No results');
       this.setState({movies: [...allMovies]});
+      alert('No results');
     } else {
       this.setState({movies: [...results]});
     }
+  }
+
+  addMovie(title) {
+
   }
 
   render() {
     return (
       <div className="movieList">
         <NavBar searchMovies={this.searchMovies}/>
+        <AddBar addMovie={this.addMovie}/>
         {this.state.movies.map(movie =>
-          <MovieList movie={movie}/>)}
+            <MovieList movie={movie}/>)}
       </div>
     );
   }
