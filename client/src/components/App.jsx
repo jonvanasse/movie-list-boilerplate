@@ -3,37 +3,14 @@ import MovieList from './MovieList.jsx';
 import NavBar from './NavBar.jsx';
 import AddBar from './AddBar.jsx';
 
-var movies = [
-  {
-    title: 'Mean Girls',
-    id: 1
-  },
-  {
-    title: 'Hackers',
-    id: 2
-  },
-  {
-    title: 'The Grey',
-    id: 3
-  },
-  {
-    title: 'Sunshine',
-    id: 4
-  },
-  {
-    title: 'Ex Machina',
-    id: 5
-  },
-];
-
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
-      movies: [...movies],
-      allMovies: [...movies]
+      allMovies: [],
+      visibleMovies: [],
+      nextId: 0
     };
     this.searchMovies = this.searchMovies.bind(this);
     this.addMovie = this.addMovie.bind(this);
@@ -49,15 +26,21 @@ class App extends React.Component {
       }
     }
     if (results.length === 0) {
-      this.setState({movies: [...allMovies]});
+      this.setState({visibleMovies: [...allMovies]});
       alert('No results');
     } else {
-      this.setState({movies: [...results]});
+      this.setState({visibleMovies: [...results]});
     }
   }
 
   addMovie(title) {
-
+    var movies = [...this.state.allMovies];
+    movies.push({title: title, id: this.state.nextId});
+    this.setState({
+      allMovies: [...movies],
+      visibleMovies: [...movies],
+      nextId: this.state.nextId ++
+    });
   }
 
   render() {
@@ -65,7 +48,7 @@ class App extends React.Component {
       <div className="movieList">
         <NavBar searchMovies={this.searchMovies}/>
         <AddBar addMovie={this.addMovie}/>
-        {this.state.movies.map(movie =>
+        {this.state.visibleMovies.map(movie =>
             <MovieList movie={movie}/>)}
       </div>
     );

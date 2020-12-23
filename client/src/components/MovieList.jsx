@@ -8,7 +8,7 @@ class MovieList extends React.Component {
   render() {
     return (
       <div className="movieListing">
-        <h5>{this.props.movie.title}</h5>
+        <h5 key={this.props.movie.title}>{this.props.movie.title}</h5>
       </div>
     )
   }

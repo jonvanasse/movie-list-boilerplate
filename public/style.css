@@ -15,8 +15,8 @@
 
 #addBar {
   display: flex;
-  justify-content: center
-  margin-top: 50px;
+  justify-content: center;
+  margin: 50px;
 }
 
 .movieListing {

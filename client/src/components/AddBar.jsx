@@ -1,5 +1,16 @@
 import React from 'react';
 
+/* function addBar() {
+  const [movie, setMovie] = useState('');
+
+  return (
+    <label id="addBar">
+      <input type="text" name="add" onChange={this.handleChange} onKeyPress={this.handleKeyPress} onSubmit={this.handleSubmit} onFocus={this.onFocusAdd}></input>
+      <button onClick={this.handleSubmit}>Add movie</button>
+    </label>
+  )
+} */
+
 class AddBar extends React.Component {
 
   constructor(props) {
@@ -7,6 +18,12 @@ class AddBar extends React.Component {
     this.state = {
       title: ''
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.onFocusAdd = this.onFocusAdd.bind(this);
+
   }
 
   handleSubmit() {
@@ -35,7 +52,7 @@ class AddBar extends React.Component {
     return (
       <label id="addBar">
         <input type="text" name="add" onChange={this.handleChange} onKeyPress={this.handleKeyPress} onSubmit={this.handleSubmit} onFocus={this.onFocusAdd}></input>
-        <button>Add movie</button>
+        <button onClick={this.handleSubmit}>Add movie</button>
       </label>
     )
   }
