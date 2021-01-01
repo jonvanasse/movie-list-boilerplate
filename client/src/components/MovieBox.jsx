@@ -14,17 +14,10 @@ class MovieBox extends React.Component {
   render() {
     return (
 
-   // div container
+      // div container
       <div>
         {/* div for two radio buttons, watched and unwatched (unwatched being the default selected via constructor's initial state) */}
-        <div onChange={event => this.whichList(event)}>
-          {/* // first button */}
-          <button type="radio" value="true" name="watched"/> Watched
 
-          {/* // second button */}
-          <button type="radio" value="false" defaultChecked name="unwatched"/> Unwatched
-          {/* // close the radio button container */}
-        </div>
 {/*         // table with a className corresponding to the watched property's boolean value
 
           // MovieItem?
@@ -41,10 +34,8 @@ class MovieBox extends React.Component {
 
           // h5 element from below with the watch party specified
  */}
-          <div className="movieListing">
-            <h5 key={this.props.movie.title}>{this.props.movie.title}</h5>
-          </div>
-      // close the container
+        <MovieList movies={this.props.movies}/>
+      {/* // close the list container */}
       </div>
     )
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import AddBar from './AddBar.jsx';
 
 class NavBar extends React.Component {
 
@@ -39,11 +40,21 @@ class NavBar extends React.Component {
     return (
       <div id="movieListHeader">
         <h2>Movie List</h2>
-        <div id="searchBar">
-          <label onSubmit={this.handleSubmit}>
-            <input type="text" name="search" onKeyPress={this.handleKeyPress} onChange={this.handleChange} defaultValue="Search for a movie..." onFocus={this.onFocusSearch}></input>
-          </label>
-          <button onClick={this.handleSubmit}>&#x1F50D;</button>
+        <div id="toggleList" onChange={event => this.props.toggleList(event)}>
+          {/* // first button */}
+          Watched<input className="watchedButton" type="radio" value="true" name="watched"/>
+          {/* // second button */}
+          <input className="watchedButton" type="radio" value="false" defaultChecked name="watched"/> Unwatched
+          {/* // close the radio button container */}
+        </div>
+        <div id="searchAndAdd">
+          <div id="searchBar">
+            <label onSubmit={this.handleSubmit}>
+              <input type="text" name="search" onKeyPress={this.handleKeyPress} onChange={this.handleChange} defaultValue="Search for a movie..." onFocus={this.onFocusSearch}></input>
+            </label>
+            <button onClick={this.handleSubmit}>&#x1F50D;</button>
+          </div>
+          <AddBar addMovie={this.props.addMovie}/>
         </div>
       </div>
     )

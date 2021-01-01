@@ -13,10 +13,18 @@
   height: 60px;
 }
 
+#toggleList {
+
+}
+
 #addBar {
   display: flex;
   justify-content: center;
   margin: 50px;
+}
+
+.watchedButton {
+
 }
 
 .movieListing {
