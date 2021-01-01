@@ -1,7 +1,7 @@
 import React from 'react';
-import MovieItem from './MovieItem.jsx';
+import MovieList from './MovieList.jsx';
 
-class MovieList extends React.Component {
+class MovieBox extends React.Component {
 
   constructor(props) {
     super(props);
@@ -51,4 +51,4 @@ class MovieList extends React.Component {
   }
 }
 
-export default MovieList
+export default MovieBox

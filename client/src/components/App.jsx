@@ -8,8 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allMovies: [],
-      visibleMovies: [],
+      toWatch: [],
+      watched: [],
       nextId: 0
     };
     this.searchMovies = this.searchMovies.bind(this);
@@ -17,28 +17,28 @@ class App extends React.Component {
   }
 
   searchMovies(title) {
-    var allMovies = [...this.state.allMovies];
-    var indexes = allMovies.map(movie => movie.title.includes(title))
+    var toWatch = [...this.state.toWatch];
+    var indexes = toWatch.map(movie => movie.title.includes(title))
     var results = [];
     for (var i = 0; i < indexes.length; i++) {
       if (indexes[i] === true) {
-        results.push(allMovies[i]);
+        results.push(toWatch[i]);
       }
     }
     if (results.length === 0) {
-      this.setState({visibleMovies: [...allMovies]});
+      this.setState({watched: [...toWatch]});
       alert('No results');
     } else {
-      this.setState({visibleMovies: [...results]});
+      this.setState({watched: [...results]});
     }
   }
 
   addMovie(title) {
-    var movies = [...this.state.allMovies];
+    var movies = [...this.state.toWatch];
     movies.push({title: title, id: this.state.nextId});
     this.setState({
-      allMovies: [...movies],
-      visibleMovies: [...movies],
+      toWatch: [...movies],
+      watched: [...movies],
       nextId: this.state.nextId ++
     });
   }
@@ -48,7 +48,7 @@ class App extends React.Component {
       <div className="movieList">
         <NavBar searchMovies={this.searchMovies}/>
         <AddBar addMovie={this.addMovie}/>
-        {this.state.visibleMovies.map(movie =>
+        {this.state.watched.map(movie =>
             <MovieList movie={movie}/>)}
       </div>
     );
