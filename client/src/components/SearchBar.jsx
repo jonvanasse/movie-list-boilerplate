@@ -5,7 +5,7 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: 'for a movie...'
+      search: 'the internet for movies...'
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -18,6 +18,7 @@ class SearchBar extends React.Component {
     var searched = this.state.search;
     this.setState({search: ''});
     this.props.searchMovies(searched);
+/*     this.props.changeView('search'); */
   }
 
   handleChange(event) {
@@ -37,8 +38,8 @@ class SearchBar extends React.Component {
   }
 
   onBlurSearch(event) {
-    this.setState({search: 'for a movie...'})
-    event.target.value = 'for a movie...';
+    this.setState({search: 'the internet for movies...'})
+    event.target.value = 'the internet for movies...';
   }
 
   render() {

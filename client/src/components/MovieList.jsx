@@ -11,9 +11,9 @@ class MovieList extends React.Component {
   render() {
 
     return (
-      <div id="movieContainer">
-        <ul id="movieList">
-          {this.props.movies.map(movie => <MovieItem movie={movie} key={movie.id} toggleMovie={this.props.toggleMovie} view={this.props.view} />)}
+      <div>
+        <ul className="movieList">
+          {this.props.movies.map(movie => <MovieItem movie={movie} searched={this.props.searched} key={movie.id} toggleMovie={this.props.toggleMovie} view={this.props.view} />)}
         </ul>
       </div>
     )

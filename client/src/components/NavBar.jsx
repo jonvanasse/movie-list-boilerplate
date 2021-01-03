@@ -15,7 +15,7 @@ class NavBar extends React.Component {
       <div id="navbar">
         <ToggleBar changeView={this.props.changeView} view={this.props.view}/>
         <h2>Movie List</h2>
-        <SearchBar searchMovies={this.props.searchMovies}/>
+        <SearchBar changeView={this.props.changeView} searchMovies={this.props.searchMovies}/>
         <AddBar addMovie={this.props.addMovie}/>
       </div>
     )

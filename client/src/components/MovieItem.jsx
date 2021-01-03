@@ -8,7 +8,8 @@ class MovieItem extends React.Component {
     this.state = {
       title: this.props.movie.title,
       id: this.props.movie.id,
-      watched: this.props.movie.watched
+      watched: this.props.movie.watched,
+      searched: this.props.searched
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -27,7 +28,7 @@ class MovieItem extends React.Component {
     const view = this.props.view;
 
     return (
-      <li className={`movieItem ${view === 'all' ? 'visible' : view === 'watched' && watched ? 'visible' : view === 'unwatched' && !watched ? 'visible' : 'not-visible'}`} key={this.props.movie.id}>
+      <li className={`movieItem ${view === 'search' && this.state.searched ? 'visible' : view === 'all' && !this.state.searched ? 'visible' : view === 'watched' && watched && !this.state.searched ? 'visible' : view === 'unwatched' && !watched && !this.state.searched ? 'visible' : 'not-visible'}`} key={this.props.movie.id}>
         <h3>{this.props.movie.title}</h3>
         <span className={`watchButton ${watched ? 'watched' : 'unwatched'}`} onClick={this.handleClick}>{watched ? 'watched' : 'not watched'}</span>
       </li>

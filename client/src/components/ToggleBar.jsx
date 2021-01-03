@@ -9,7 +9,7 @@ class ToggleBar extends React.Component {
 
   render() {
 
-    const views = ['all', 'watched', 'unwatched']
+    const views = ['all', 'watched', 'unwatched', 'search']
 
     return (
       <div id="toggleBar">

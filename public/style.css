@@ -21,7 +21,7 @@
 #navbar {
   background-color: rgb(70, 64, 121);
   display: flex;
-  position: absolute;
+  position: fixed;
   justify-content: space-around;
   align-items: center;
   top: 0;
@@ -99,6 +99,11 @@
 }
 
 #unwatched {
+  border-top: 1px solid white;
+  border-bottom: none;
+}
+
+#search {
   border-top-right-radius: 10px;
   border-right: 1px solid white;
   border-top: 1px solid white;
@@ -107,14 +112,21 @@
 
 /* MOVIE LIST ITEMS BELOW */
 
-#movieList {
-  display: block;
+
+.movieList {
+  display: inline-block;
   padding-top: 40px;
   align-items: center;
 }
 
 .movieItem {
   display: flex;
+  width: 15%;
+  padding: 0 1rem 0 1rem;
+  margin: .5rem .5rem .5rem .5rem;
+  vertical-align: top;
+  border: 2px solid lightblue;
+  border-radius: 15px;
   color: black;
   justify-content: space-between;
 }
@@ -133,14 +145,6 @@
   font-weight: bold;
 }
 
-.watched {
-  text-decoration: line-through;
-}
-
-.unwatched {
-  text-decoration: none;
-}
-
 .visible {
   display: inherit;
 }
@@ -149,11 +153,20 @@
   display: none;
 }
 
+.watched {
+  text-decoration: line-through;
+}
+
+.unwatched {
+  text-decoration: none;
+}
+
+
 /* FOOTER */
 
 #footer {
   display: flex;
-  position: absolute;
+  position: fixed;
   justify-content: center;
   background-color: rgb(70, 64, 121);
   left: 0;

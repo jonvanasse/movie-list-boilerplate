@@ -1,8 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import MovieList from './MovieList.jsx';
 import NavBar from './NavBar.jsx';
-// import styles from './haven'tdonethisyet'
 
+
+const TMDBKEY = '3b0de5aa0e5b9ea7abfd1bf93c952654';
+const searchUrl = 'https://api.themoviedb.org/3/search/movie';
 class App extends React.Component {
 
   constructor(props) {
@@ -10,7 +13,7 @@ class App extends React.Component {
 
     this.state = {
       movies: [],
-      visibleMovies: [],
+      searchResults: [],
       view: 'all',
       nextId: 0,
       searchResults: []
@@ -20,46 +23,36 @@ class App extends React.Component {
     this.addMovie = this.addMovie.bind(this);
     this.toggleMovie = this.toggleMovie.bind(this);
     this.changeView = this.changeView.bind(this);
-    // PLANNING TO USE THE FOLLOWING TO ANIMATE SEARCH RESULTS IN ALTENATE VIEWS
-    this._handleSearchNoResults = this._handleSearchNoResults.bind(this);
-    // NOT YET IMPLEMENTED - this._handleSearchResultsInOtherList = this._handleSearchResultsInOtherList.bind(this);
   }
 
   searchMovies(title) {
-    var movies = [...this.state.movies];
-    var indexes = movies.map(movie => movie.title.includes(title));
     var results = [];
-    for (var i = 0; i < indexes.length; i++) {
-      if (indexes[i] === true) {
-        results.push(movies[i]);
+    var movies = [];
+    axios.get(searchUrl, {
+      params: {
+        api_key: TMDBKEY,
+        query: title
       }
-    }
-    if(results.length === 0) {
-      this._handleSearchNoResults();
-    } else {
-      this.setState({searchResults: [...results]});
-    }
+    })
+    .then(response => {
+      results = [...response.data.results]
+      for (var i = 0; i < results.length; i++) {
+        movies.push({title: results[i].title, id: results[i].id, watched: false, searched: true})
+      }
+      this.setState(() => ({searchResults: [...movies], view: 'search'}))
+    })
+    .catch(error => console.log(error))
   }
 
   addMovie(title) {
     var movies = [...this.state.movies];
     var view = this.state.view;
-    var movie = Object.create({title: title, id: this.state.nextId, watched: false})
+    var movie = Object.create({title: title, id: this.state.nextId, watched: false, searched: false})
     movies.push(movie);
-/*     if (view === 'all' || view === 'unwatched') {
-      var visibleMovies = [...this.state.visibleMovies];
-      visibleMovies.push(movie)
-      this.setState({
-        visibleMovies: visibleMovies,
-        movies: [...movies],
-        nextId: this.state.nextId ++
-      })
-    } else {
-       */this.setState({
-        movies: [...movies],
-        nextId: this.state.nextId ++
-      });
-    /* } */
+    this.setState({
+      movies: [...movies],
+      nextId: this.state.nextId ++
+    });
   }
 
   toggleMovie(id) {
@@ -77,39 +70,17 @@ class App extends React.Component {
     this.setState({ view: view })
   }
 
-/*   regenera{      var movies = [...this.state.movies]
-    if (view === 'all') {
-      this.setState({visibleMovies: [...movies], view: view})
-    } else {
-      var visibleMovies = [];
-      var watched = view === 'watched';
-      for (let i = 0; i < movies.length; i++) {
-        if (movies[i].watched === watched) {
-          visibleMovies.push(movies[i]);
-        }
-      }
-      this.setState({visibleMovies: [...visibleMovies], view: view})
-    }
-  } */
-
-  _handleSearchNoResults() {
-    console.log('no search results');
-  }
-
-/* NOT YET IMPLEMENTED
-  _handleSearchResultsInOtherList() {
-    console.log('search results in other list');
-  } */
-
   render() {
 
     const movies = [...this.state.movies];
+    const searchResults = [...this.state.searchResults]
     const view = this.state.view;
 
     return (
       <div id="body">
         <NavBar searchMovies={this.searchMovies} addMovie={this.addMovie} changeView={this.changeView} view={view}/>
-        <MovieList movies={movies} toggleMovie={this.toggleMovie} changeView={this.changeView} view={view}/>
+        <MovieList className={view !== 'search' ? 'visible' : 'not-visible'} movies={movies} toggleMovie={this.toggleMovie} changeView={this.changeView} view={view}/>
+        <MovieList className={view === 'search' ? 'visible' : 'not-visible'} searched="true" movies={searchResults} toggleMovie={this.toggleMovie} changeView={this.changeView} view={view}/>
         <div id="footer">
           <p>brought to you by&nbsp;
             <a href="about:blank">@notArealHandle</a>
