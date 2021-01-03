@@ -1,28 +1,18 @@
 import React from 'react';
 
-/* function addBar() {
-  const [movie, setMovie] = useState('');
-
-  return (
-    <label id="addBar">
-      <input type="text" name="add" onChange={this.handleChange} onKeyPress={this.handleKeyPress} onSubmit={this.handleSubmit} onFocus={this.onFocusAdd}></input>
-      <button onClick={this.handleSubmit}>Add movie</button>
-    </label>
-  )
-} */
-
 class AddBar extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      title: ''
+      title: 'a movie to the list...'
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.onFocusAdd = this.onFocusAdd.bind(this);
+    this.onBlurAdd = this.onBlurAdd.bind(this);
 
   }
 
@@ -37,23 +27,28 @@ class AddBar extends React.Component {
     this.setState({title: newChar})
   }
 
-  onFocusAdd(event) {
-    this.setState({title: ''})
-    event.target.value = '';
-  }
-
   handleKeyPress(event) {
     if (event.key === 'Enter') {
       this.handleSubmit();
     }
   }
 
+  onFocusAdd(event) {
+    this.setState({title: ''})
+    event.target.value = '';
+  }
+
+  onBlurAdd(event) {
+    this.setState({title: 'a movie to the list...'})
+    event.target.value = 'a movie to the list...';
+  }
+
   render() {
     return (
-      <label id="addBar">
-        <input type="text" name="add" onChange={this.handleChange} onKeyPress={this.handleKeyPress} onSubmit={this.handleSubmit} onFocus={this.onFocusAdd}></input>
-        <button onClick={this.handleSubmit}>Add movie</button>
-      </label>
+      <div className="navbar">
+        <button onClick={this.handleSubmit}>Add</button>
+        <input type="text" name="add" onChange={this.handleChange} onKeyPress={this.handleKeyPress} onSubmit={this.handleSubmit} onFocus={this.onFocusAdd} onBlur={this.onBlurAdd} defaultValue={this.state.title}></input>
+      </div>
     )
   }
 }
